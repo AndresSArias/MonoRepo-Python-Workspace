@@ -78,7 +78,7 @@ def main(url):
             WebDriverWait(driver, 15).until(EC.title_is('Estudiantes'))
         except TimeoutException:
             raise NoPageProtocoloManiobraException()
-        
+        contador = 0
         while True:
             # Abre la página web donde se encuentra el elemento
             driver.get(url)
@@ -89,8 +89,9 @@ def main(url):
             if not check_for_element(driver) and button_url:
                 break  # Si el elemento no está presente, sale del bucle
 
-            print("El elemento con el texto 'No hay cupos disponibles' está presente. Volviendo a intentar...")
-            time.sleep(1)  # Espera antes de volver a intentar
+            print(f"El elemento con el texto 'No hay cupos disponibles' está presente por {contador}. Volviendo a intentar...")
+            time.sleep(1)
+            contador = contador +1  # Espera antes de volver a intentar
 
         print(f"El elemento con el texto 'No hay cupos disponibles' ya no está presente.\nurl de inscripción:\n{button_url}")
         driver.get(button_url)
@@ -98,6 +99,7 @@ def main(url):
         # Asegúrate de cerrar el proceso de Chrome cuando hayas terminado
         driver.quit()
         chrome_process.terminate()
+        print('CERRANDO')
 
 if __name__ == "__main__":
     main(input('url de materia: '))
