@@ -1,25 +1,29 @@
-from PIL import Image, ImageDraw
-import svgwrite
+import cairosvg
 
-def create_svg(filename):
-    dwg = svgwrite.Drawing(filename, profile='tiny')
-    dwg.add(dwg.circle(center=(50, 50), r=40, stroke=svgwrite.rgb(10, 10, 16, '%'), fill='red'))
-    dwg.save()
-
-def convert_svg_to_png(svg_filename, png_filename):
-    image = Image.new("RGB", (100, 100), "white")
-    draw = ImageDraw.Draw(image)
-    draw.rectangle([20, 20, 80, 80], fill="blue", outline="black")
-    image.save(png_filename)
+def convert_svg_to_png(svg_file, png_file):
+    """
+    Convierte un archivo SVG a PNG.
+    
+    :param svg_file: Ruta del archivo SVG de entrada.
+    :param png_file: Ruta del archivo PNG de salida.
+    """
+    try:
+        cairosvg.svg2png(url=svg_file, write_to=png_file)
+        print(f"Conversión exitosa: {png_file}")
+    except Exception as e:
+        print(f"Error durante la conversión: {e}")
 
 
 
 def main():
-    svg_filename = "static/SVG_logo.svg"
-    png_filename = "static/PNG_logo.png"
+    # Ruta del archivo SVG de entrada
+    svg_file = "static/SVG_logo.svg"
 
-    create_svg(svg_filename)
-    convert_svg_to_png(svg_filename, png_filename)
+    # Ruta del archivo PNG de salida
+    png_file = "static/PNG_logo.png"
+
+    # Llamar a la función de conversión
+    convert_svg_to_png(svg_file, png_file)
 
 if __name__ == "__main__":
     print("Bienvenido al convertidor de SVG to PNG")
