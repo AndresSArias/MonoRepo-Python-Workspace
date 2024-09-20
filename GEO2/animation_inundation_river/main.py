@@ -36,6 +36,11 @@ def main():
     # Reading the river shapefile (vector)
     river_gdf = gpd.read_file(river_path)
 
+    # Verificar y re-proyectar si es necesario
+    if river_gdf.crs != dem_meta['crs']:
+        river_gdf = river_gdf.to_crs(dem_meta['crs'])  # Cambiar CRS del shapefile si no coincide
+
+
     # Generate the hillshade array
     hillshade_array = hillshade(dem_array, 315, 45) 
 
