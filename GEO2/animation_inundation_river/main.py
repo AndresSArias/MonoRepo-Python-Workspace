@@ -96,6 +96,7 @@ def main():
     imageio.mimsave(gif_path, frames, duration=0.5, loop=0)  # Save with a 0.5-second delay between frames
 
     print(f"Animación guardada en: {gif_path}")    
+    
 if __name__ == "__main__":
     print("Bienvenido al creador de inundación de un río")
     main()
