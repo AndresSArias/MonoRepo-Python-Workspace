@@ -44,5 +44,17 @@ Se mantiene la estructura inicial del primer endpoint que vimos sólo que se ubi
 Nota: Si en el parseo hay algún error de tipo, etc FastAPI avisa.
 
 ## Documentación
-Como se comentó maneja los estándares, por esto genera documentación de OpenApi o Swagger, mediante la ruta normal más /docs.
-
+Como se comentó maneja los estándares, por esto genera documentación de OpenApi o Swagger.
+### Swagger
+Para acceder en Swagger se ingresa a la dirrección base + /docs
+![swagger](material\swagger.png)
+Esta es una documentación que se puede ver en formato OpenApi con el SwaggerUI, donde se pueden probar los endpoints y la respuestas de los mismo, esto ayuda a probar los endpoints que maneja los query params de mejor forma que en la url del navegador.
+En la parte de Schemas se ven todas las entidades que se gestionan en FastAPI, además de los modelos de error.
+### OpenApi
+Como comenté antiormente OpenApi es el formato, por lo tanto para poder observarlo entramos a la dirrección base + /openapi.json
+![formatOpenApi](material\openapi.png)
+Es un Json con toda la información de la API, esto es útil para poder dado el caso analizar un API con otra herramienta, este Json se logra generar gracias a los estándares que tiene FastAPI, parámetros, tipos de variables, entre otras.
+### Redoc
+Es otra librería que está integrando FastAPI, para documentar las APIS en un formato más "lindo", para acceder entramos a la dirrección base + /redoc
+![redoc](material\redoc.png)
+Interfaz más intuitiva para ver los endpoints, su composición, respuesta, entre otros. No deja probarlos como Swagger, pero es muy amigable para analizar los endpoints con un motor de busqueda y las especificaciones ya comentadas.
