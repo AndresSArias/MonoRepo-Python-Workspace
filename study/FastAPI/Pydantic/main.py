@@ -41,6 +41,7 @@ class UserConRestricciones (BaseModel):
     name: Optional[str]
     #gt = greater than (mayor que) 
     #lt = less than (menor que)
+    #le = less equals (menor o igual)
     # ... = Es requerido, si colocas un valor será el de defecto y si no colocas saldrá error.
     age: int = Field (...,gt = 0, lt =18)
     weight: int
