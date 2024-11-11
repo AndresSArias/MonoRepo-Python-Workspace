@@ -30,3 +30,20 @@ class Movie(BaseModel):
                 ]
             }
         }
+    
+
+class CustomerBase(SQLModel):
+    name: str = Field(default=None)
+    description: str | None = Field(default=None)
+    email: EmailStr = Field(default=None)
+    age: int = Field(default=None)
+
+    @field_validator("email")
+    @classmethod
+    def validate_email(cls, value):
+        session = Session(engine)
+        query = select(Customer).where(Customer.email == value)
+        result = session.exec(query).first()
+        if result:
+            raise ValueError("This email is already registered")
+        return value

@@ -6,6 +6,7 @@ from fastapi import (
     HTTPException,
     Request,
 )
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from typing import List
 from time import time
@@ -72,6 +73,14 @@ async def add_process_time_header(request: Request, call_next):
     process_time = time()-start_time
     response.headers['X-Process-Time'] = str(process_time)
     return response
+
+@app.middleware("http")
+async def error_handler(request: Request, call_next):
+    try:
+        return await call_next(request)
+    except Exception as e:
+        print(f"Error Handler Exception: {str(e)}")
+        return JSONResponse(status_code=500, content={'error': str(e)})
 
 if __name__ == '__main__':
     uvicorn.run(app='main:app',reload=True)

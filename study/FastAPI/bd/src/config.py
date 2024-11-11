@@ -202,7 +202,7 @@ def selec_heroes_one_row():
         #Busca directamente por clave primaria (por ejemplo, id). Si no encuentra, retorna None.
         hero = session.get(Hero, id)  # Busca el héroe con id=1
         print("Hero:", hero)
-
+#En el endpoint se llaman skip (página) y limit (elementos)
 def selec_heroes_range_row():
     with Session(engine) as session:
         #en la creación del querry, .limit(#) número max de rangos devueltos. con -1 trae a todos.
